@@ -67,14 +67,38 @@
 }
 
 @layer base {
-  /* * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
-  } */
+    @apply bg-black
+  }
 }
 
-body {
-  background-color: #000000;
+@layer utilities {
+  .paragraph {
+    @apply text-[10px] tablet:text-base
+  }
+
+  .btn {
+    @apply w-full bg-kingfisher-800 text-xs tablet:text-lg rounded-full
+  }
+
+  .loader {
+    @apply mr-2 h-4 w-4 animate-spin
+  }
+
+  .alert {
+    @apply flex items-center py-3 px-4 rounded mb-4 gap-3 text-base-secondary
+  }
+
+  .space-input {
+    @apply space-y-12 laptop:space-y-10
+  }
+
+  .title {
+    @apply text-xl laptop:text-2xl
+  }
+
+  .bar-menu {
+    @apply rounded-full w-full h-1 bg-white duration-300
+  }
+
 }
