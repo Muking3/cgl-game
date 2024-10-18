@@ -4,4 +4,5 @@ export type Questions = {
         answer: string;
         id: number;
     }[];
+    selectedAnswer?: string | null
 }

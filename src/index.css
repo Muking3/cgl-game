@@ -31,7 +31,7 @@
     --radius: 0.5rem;
     --color-primary: #ff0f7b;
     --color-secondary: #f89b29;
-    --color-bg-primary: rgb(69, 162, 89);
+    --color-bg-primary: #e5e3a3;
     --color-bg-secondary: rgb(147, 196, 139);
     --color-bg-tertiary: rgb(208, 40, 4);
     --color-bg-accent-primary: rgb(182, 211, 105);
@@ -78,7 +78,7 @@
   }
 
   .btn {
-    @apply w-full bg-kingfisher-800 text-base tablet:text-lg rounded-full
+    @apply w-full bg-poppy-400 text-base tablet:text-lg rounded-full
   }
 
   .loader {

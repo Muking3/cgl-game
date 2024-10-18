@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 
 type ContentProps = {
     loader: boolean
-    Submit: () => Promise<void>
+    Submit: (data: PlayerFormValues) => Promise<void>
 }
 
 export default function CreatePlayer({ loader, Submit }: ContentProps) {

@@ -6,7 +6,6 @@ import { UseFormReturn } from "react-hook-form";
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 interface EntityFormProps {
     form: UseFormReturn<any>;
     clearMessage?: () => void;
@@ -46,7 +45,7 @@ export default function EntityForm({
                             ))}
                         </div>
                         <div className="space-y-3 laptop:space-y-4">
-                            <Button type="submit" className="btn hover:bg-kingfisher-950 p-5">
+                            <Button type="submit" className="btn hover:bg-poppy-500 p-5">
                                 {loader && <Loader2 className="loader" />}
                                 {text}
                             </Button>
@@ -65,4 +64,3 @@ export default function EntityForm({
         </>
     );
 }
-

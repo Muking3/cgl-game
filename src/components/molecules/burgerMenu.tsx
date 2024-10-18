@@ -52,23 +52,23 @@ export default function BurgerMenu() {
         <div className="relative">
             <div>
                 <Menu>
-                    <MenuButton>
-                        <Button
-                            onClick={toggleMenu}
-                            className={`w-11 h-11 tablet:w-16 tablet:h-16 flex rounded-full p-3 tablet:p-4 flex-col justify-center items-center transition-transform duration-300 ${isOpen ? 'rotate-0' : 'rotate-0'}`}
-                        >
-                            <motion.div
-                                className={`bar-menu transition-all mb-1 ${isOpen ? 'rotate-45 translate-y-2' : 'rotate-0 translate-y-0'}`}
-                            />
-                            <motion.div
-                                className={`bar-menu transition-opacity mb-1 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
-                            />
-                            <motion.div
-                                className={`bar-menu transition-all ${isOpen ? '-rotate-45 -translate-y-2' : 'rotate-0 translate-y-0'}`}
-                            />
-                        </Button>
-                    </MenuButton>
-                    <MenuItems
+                    {/* <MenuButton> */}
+                    <Button
+                        onClick={toggleMenu}
+                        className={`w-11 h-11 tablet:w-16 tablet:h-16 flex rounded-full p-3 tablet:p-4 flex-col justify-center items-center transition-transform duration-300 ${isOpen ? 'rotate-0' : 'rotate-0'}`}
+                    >
+                        <motion.div
+                            className={`bar-menu transition-all mb-1 ${isOpen ? 'rotate-45 translate-y-2' : 'rotate-0 translate-y-0'}`}
+                        />
+                        <motion.div
+                            className={`bar-menu transition-opacity mb-1 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
+                        />
+                        <motion.div
+                            className={`bar-menu transition-all ${isOpen ? '-rotate-45 -translate-y-2' : 'rotate-0 translate-y-0'}`}
+                        />
+                    </Button>
+                    {/* </MenuButton> */}
+                    {/* <MenuItems
                         transition
                         anchor="bottom end"
                         className=""
@@ -98,7 +98,7 @@ export default function BurgerMenu() {
                                 <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-hover:inline">⌘D</kbd>
                             </button>
                         </MenuItem>
-                    </MenuItems>
+                    </MenuItems> */}
                 </Menu>
             </div>
         </div>
