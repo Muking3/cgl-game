@@ -27,7 +27,7 @@ export default function FormFieldCustom<T extends FieldValues>({ form, name, lab
         <FormItem>
           <FormLabel className={`flex justify-start paragraph ${labelClassName}`}>{label}</FormLabel>
           <FormControl>
-            <Input placeholder={placeholder} onFocus={onFocus} {...field} className="outline-none flex w-full" />
+            <Input placeholder={placeholder} onFocus={onFocus} {...field} className="outline-none flex w-full paragraph" />
           </FormControl>
           <FormMessage className="flex justify-start" />
         </FormItem>

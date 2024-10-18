@@ -40,7 +40,7 @@ export default function FormPassword<T extends FieldValues>({ form, name, label,
                 type={showPassword ? "text" : "password"}
                 placeholder={placeholder}
                 {...field}
-                className="outline-none w-11/12"
+                className="outline-none w-11/12 paragraph"
                 onFocus={onFocus}
               />
               <Button

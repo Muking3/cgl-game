@@ -5,19 +5,21 @@ import HomePage from "./pages/homePage";
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import BurgerMenu from "@/components/molecules/burgerMenu";
+import Register from "./pages/register";
 
 export default function App() {
 
   return (
 
     <>
-      <div className="py-10 px-4 bg-white">
-        <BurgerMenu />
-        {/* <Routes>
+      <div className="py-4 px-2 laptop:py-10 laptop:px-4">
+        {/* <BurgerMenu /> */}
+        <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/quiz/:quizId" element={<AnswerQuiz />} />
-        </Routes> */}
+        </Routes>
       </div>
     </>
   );

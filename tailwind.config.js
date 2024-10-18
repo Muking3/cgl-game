@@ -162,7 +162,7 @@ export const theme = {
       'accordion-up': 'accordion-up 0.2s ease-out'
     },
     screens: {
-      mobilesm: '410px',
+      mobilesm: '330px',
       tablet: '640px',
       laptop: '1024px',
       laptop2: '1079px',
