@@ -1,49 +1,52 @@
-import React, { useState } from 'react';
-import { db } from '@/configuration';
-import { collection, addDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import EntityForm from "@/components/organism/entityForm";
+import HeaderNav from "@/components/organism/headerNav";
+import Message from "@/components/ui/message";
+import { playerConfig } from "@/config/playerConfig";
+import { useMessage } from "@/hooks/useMessage";
+import { PlayerFormValues, playerSchema } from "@/schemas/playerSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
-const CreatePlayer = () => {
-    const [playerName, setPlayerName] = useState('');
-    const navigate = useNavigate();
+type ContentProps = {
+    loader: boolean
+    Submit: () => Promise<void>
+}
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (playerName) {
-            try {
-                // Enregistrer le nom du joueur dans Firestore
-                await addDoc(collection(db, 'players'), {
-                    name: playerName,
-                    createdAt: new Date(),
-                });
-                // Naviguer vers la page du questionnaire après l'enregistrement
-                navigate('/quiz'); // Remplace '/quiz' par le chemin vers ton questionnaire
-            } catch (error) {
-                console.error('Erreur lors de l\'ajout du joueur :', error);
-            }
-        } else {
-            alert('Veuillez entrer un nom.');
-        }
-    };
-
+export default function CreatePlayer({ loader, Submit }: ContentProps) {
+    const { messageState } = useMessage({
+        content: null,
+        type: null,
+    });
+    const defaultValues: PlayerFormValues = {
+        name: "",
+    }
+    const form = useForm<PlayerFormValues>({
+        resolver: zodResolver(playerSchema),
+        defaultValues: defaultValues,
+    })
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
-            <h2 className="mb-4 text-2xl">Créer un Avatar</h2>
-            <form onSubmit={handleSubmit} className="flex flex-col">
-                <input
-                    type="text"
-                    placeholder="Entrez votre nom"
-                    value={playerName}
-                    onChange={(e) => setPlayerName(e.target.value)}
-                    className="p-2 mb-4 border rounded"
-                    required
-                />
-                <button type="submit" className="p-2 bg-blue-500 text-white rounded">
-                    Créer
-                </button>
-            </form>
-        </div>
+        <>
+            <div className="bg-white card">
+                <HeaderNav />
+                <div className="laptop:w-1/3 mt-10 mb-0 laptop:mt-20 laptop:mb-4 space-y-10 laptop:space-y-20">
+                    <h2 className="text-2xl laptop:text-4xl font-bold text-center">
+                        Créer un joueur
+                    </h2>
+                    {messageState.content && (
+                        <Message
+                            message={messageState.content}
+                            className={messageState.type === "success" ? "bg-base-bg-primary" : "bg-base-bg-tertiary"}
+                        />
+                    )}
+                    <EntityForm
+                        onSubmit={form.handleSubmit(Submit)}
+                        inputSection={playerConfig}
+                        form={form}
+                        loader={loader}
+                        text="Prêt 😈"
+                    />
+                </div>
+            </div>
+        </>
     );
 };
-
-export default CreatePlayer;

@@ -1,37 +1,23 @@
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/configuration';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { questions } from '@/config/questionConfig';
 import HeaderNav from '@/components/organism/headerNav';
 import { Button } from '@/components/ui/button';
+import { CardSelect } from '@/components/ui/cardselect';
+import { Questions } from '@/types/question';
+import ShareQuiz from '@/components/organism/shareQuiz';
+import { Loader2 } from 'lucide-react';
 
-// const Card = ({ option, isSelected, onClick }) => (
-//     <div
-//         className={`p-4 border rounded-lg cursor-pointer ${isSelected ? 'bg-blue-500 text-white' : 'bg-white'}`}
-//         onClick={onClick}
-//     >
-//         {option.answer}
-//     </div>
-// );
-
-type Questions = {
-    question: string;
-    options: {
-        answer: string;
-        id: number;
-    }[];
-}
-
-// type Options = {
-//     answer: string;
-//     id: number;
-// }
 export default function Quiz() {
     const [randomQuestions, setRandomQuestions] = useState<Questions[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState<(string | null)[]>([]);
     const [quizLink, setQuizLink] = useState("");
+    const [loader, setLoader] = useState(false);
+    const [active, setActive] = useState(false);
+    const linkRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const shuffledQuestions: Questions[] = questions
@@ -56,6 +42,8 @@ export default function Quiz() {
     };
 
     const handleSubmitAnswers = async () => {
+        setLoader(true);
+
         const questionsWithAnswers = randomQuestions.map((question, index) => ({
             question: question.question,
             options: question.options,
@@ -74,46 +62,54 @@ export default function Quiz() {
             setQuizLink(generatedLink);
         } catch (error) {
             console.error("Erreur lors de l'envoi des réponses: ", error);
+        } finally {
+            setLoader(false);
+            setActive(true)
         }
     };
+
+    useEffect(() => {
+        if (quizLink && linkRef.current) {
+            linkRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [quizLink]);
 
     return (
         <div className='card bg-gradient-to-t from-base-secondary to-base-primary'>
             <HeaderNav />
-            <div className='w-full laptop:w-3/4 mt-10 mb-0 laptop:mt-20 laptop:mb-4'>
+            <div className='w-full laptop:w-1/2 mt-10 mb-0 laptop:mt-20 laptop:mb-4 space-y-10'>
                 {randomQuestions.length > 0 && (
                     <div className='space-y-14'>
                         <h3 className='text-2xl laptop:text-4xl font-bold text-white'>{randomQuestions[currentQuestionIndex].question}</h3>
                         <div className="grid grid-cols-2 gap-4 laptop:gap-14 mt-2">
                             {randomQuestions[currentQuestionIndex].options.map((option) => (
-                                <div
+                                <CardSelect
                                     key={option.id}
-                                    className={`p-4 paragraph rounded-lg cursor-pointer ${selectedAnswers[currentQuestionIndex] === option.answer ? 'bg-[#f5f5dc] text-black font-medium' : 'bg-white'}`}
+                                    option={option}
+                                    isSelected={selectedAnswers[currentQuestionIndex] === option.answer}
                                     onClick={() => handleOptionChange(option.answer)}
-                                >
-                                    {option.answer}
-                                </div>
+                                />
                             ))}
                         </div>
-                        <Button
-                            className='w-full paragraph rounded-full gap-3 p-5'
-                            onClick={handleNextQuestion}
-                        >
-                            {currentQuestionIndex < randomQuestions.length - 1 ? 'Suivant' : 'Terminer'}
-                        </Button>
+                        <div className='text-center'>
+                            <Button
+                                className='w-full laptop:w-3/4 paragraph rounded-full gap-1 p-5'
+                                onClick={handleNextQuestion}
+                                disabled={loader || !selectedAnswers[currentQuestionIndex] || active}
+                            >
+                                {loader && <Loader2 className="loader" />}
+                                {currentQuestionIndex < randomQuestions.length - 1 ? 'Suivant' : 'Terminer'}
+                            </Button>
+                        </div>
                     </div>
                 )}
 
                 {quizLink && (
-                    <div className="mt-4">
-                        <p>Partagez ce lien avec vos amis pour qu'ils puissent répondre au questionnaire :</p>
-                        <a href={quizLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-                            {quizLink}
-                        </a>
+                    <div ref={linkRef}>
+                        <ShareQuiz quizLink={quizLink} />
                     </div>
                 )}
             </div>
         </div>
     );
 };
-

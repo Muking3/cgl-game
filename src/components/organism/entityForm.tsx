@@ -15,10 +15,10 @@ interface EntityFormProps {
     loader: boolean;
     inputSection: Field[]
     text: string
-    google: string
-    facebook: string
-    handleGoogle: () => any
-    handleFacebook: () => any
+    google?: string
+    facebook?: string
+    handleGoogle?: () => any
+    handleFacebook?: () => any
 }
 
 export default function EntityForm({
@@ -50,14 +50,14 @@ export default function EntityForm({
                                 {loader && <Loader2 className="loader" />}
                                 {text}
                             </Button>
-                            <Button className="w-full paragraph rounded-full gap-3 p-5" onClick={handleGoogle}>
+                            {google && <Button className="w-full paragraph rounded-full gap-3 p-5" onClick={handleGoogle}>
                                 <FontAwesomeIcon icon={faGoogle} size="lg" />
                                 <span>{google}</span>
-                            </Button>
-                            <Button className="w-full paragraph rounded-full gap-3 p-5" onClick={handleFacebook}>
+                            </Button>}
+                            {facebook && <Button className="w-full paragraph rounded-full gap-3 p-5" onClick={handleFacebook}>
                                 <FontAwesomeIcon icon={faFacebook} size="lg" />
                                 <span>{facebook}</span>
-                            </Button>
+                            </Button>}
                         </div>
                     </form>
                 </Form>
