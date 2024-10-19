@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import BurgerMenu from "@/components/molecules/burgerMenu";
 import { useNavigate } from "react-router-dom";
 import HeaderNav from "@/components/organism/headerNav";
 
@@ -32,35 +31,20 @@ export default function HomePage() {
         });
     }, []);
 
-    const handleQuiz = () => {
-        navigate("/register");
-    }
+    const handleQuiz = async () => {
+        const token = await localStorage.getItem('token');
+        if (token) {
+            navigate("/quiz");
+        }
+        else {
+            navigate("/register");
+        }
+    };
+
 
     return (
         <div className="rounded-t-3xl bg-gradient-to-t from-base-secondary to-base-primary p-6 space-y-10">
-            {/* <header className="flex justify-between items-center">
-                <img src="./src/assets/IMG-7467__1_-removebg-preview.png" alt="logo" className="h-12 w-auto" />
-                <nav className="mr-2">
-                    <ul className="flex space-x-14 font-semibold">
-                        <li>
-                            <a href="#home" className="text-white hover:text-base-secondary">
-                                A propos de nous
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#about" className="text-white hover:text-base-secondary">
-                                Creer un questionnaire
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#contact" className="text-white hover:text-base-secondary">
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </header> */}
-            <HeaderNav />
+            <HeaderNav text="text-white hover:text-black" />
             <div className="flex flex-col laptop:flex-row justify-center items-center gap-12 tablet:gap-28 laptop:gap-24 w-full h-full laptop:w-3/4 m-0 laptop:m-auto py-10 laptop:py-20">
                 <div className="w-3/4 laptop:w-4/12 flex items-center justify-end">
                     <img ref={imgRefOne} src="./src/assets/083041df-7176-4a51-a95b-a21d67bc960a.jpeg" alt="" className="rounded-3xl h-auto w-2/4 rotate-[-10deg] border-white border-4 tablet:border-8" />

@@ -76,7 +76,7 @@ export default function Quiz() {
 
     return (
         <div className='card bg-gradient-to-t from-base-secondary to-base-primary'>
-            <HeaderNav />
+            <HeaderNav text="text-white hover:text-black" />
             <div className='w-full laptop:w-1/2 mt-10 mb-0 laptop:mt-20 laptop:mb-4 space-y-10'>
                 {randomQuestions.length > 0 && (
                     <div className='space-y-14'>

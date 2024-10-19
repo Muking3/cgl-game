@@ -6,20 +6,18 @@ import { RegisterFormValues, registerSchema } from "@/schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@/configuration";
 import HeaderNav from "@/components/organism/headerNav";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Register() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
     const [loader, setLoader] = useState(false)
-    const { clearMessage, messageState, setMessageState } = useMessage({
+    const { clearMessage, messageState } = useMessage({
         content: null,
         type: null,
     });
@@ -32,15 +30,6 @@ export default function Register() {
         resolver: zodResolver(registerSchema),
         defaultValues: defaultValues,
     })
-
-    // const Submit = async (data: RegisterFormValues) => {
-    //     setLoader(true);
-    //     setMessageState({
-    //         content: "Une erreur est survenue lors de la connexion.",
-    //         type: "error",
-
-    //     })
-    // }
 
     const handleGoogle = () => {
 
@@ -67,14 +56,14 @@ export default function Register() {
             setLoading(false);
         } catch (error) {
             console.error("Erreur lors de la création de l'utilisateur :", error);
-            setError(error.message);
+            // setError(error.message);
             setLoading(false);
         }
     };
 
     return (
         <div className="bg-white card">
-            <HeaderNav />
+            <HeaderNav text="text-black hover:text-poppy-500" />
             <div className="laptop:w-1/3 mt-10 mb-0 laptop:mt-20 laptop:mb-4 space-y-10 laptop:space-y-20">
                 <h2 className="text-2xl laptop:text-4xl font-bold text-center">
                     Créer un compte

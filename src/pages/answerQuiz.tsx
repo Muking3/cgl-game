@@ -121,7 +121,7 @@ export default function AnswerQuiz() {
                 />
             ) : (
                 <div className='card bg-gradient-to-t from-base-secondary to-base-primary'>
-                    <HeaderNav />
+                    <HeaderNav text="text-white hover:text-black" />
                     {!showScore && questions.length > 0 ? (
                         <div className='w-full laptop:w-1/2 mt-10 mb-0 laptop:mt-20 laptop:mb-4 space-y-10 laptop:space-y-20'>
                             <h3 className='text-2xl laptop:text-4xl font-bold text-white'>{questions[currentQuestionIndex].question}</h3>

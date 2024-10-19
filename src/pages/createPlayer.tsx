@@ -27,7 +27,7 @@ export default function CreatePlayer({ loader, Submit }: ContentProps) {
     return (
         <>
             <div className="bg-white card">
-                <HeaderNav />
+                <HeaderNav text="text-black hover:text-poppy-500"/>
                 <div className="laptop:w-1/3 mt-10 mb-0 laptop:mt-20 laptop:mb-4 space-y-10 laptop:space-y-20">
                     <h2 className="text-2xl laptop:text-4xl font-bold text-center">
                         Créer un joueur
