@@ -58,7 +58,7 @@ export default function Quiz() {
                 timestamp: new Date(),
             });
 
-            const generatedLink = `http://localhost:5173/quiz/${quizId}`;
+            const generatedLink = `https://cgl-games.web.app/quiz/${quizId}` || `https://cgl-games.firebaseapp.com/quiz/${quizId}`;
             setQuizLink(generatedLink);
         } catch (error) {
             console.error("Erreur lors de l'envoi des réponses: ", error);

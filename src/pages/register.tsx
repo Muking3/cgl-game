@@ -51,10 +51,9 @@ export default function Register() {
             });
             navigate("/quiz");
             console.log("Utilisateur créé avec succès !");
-            setLoader(false);
         } catch (error) {
             console.error("Erreur lors de la création de l'utilisateur :", error);
-            // setError(error.message);
+        } finally {
             setLoader(false);
         }
     };

@@ -5,6 +5,7 @@
   },
   "hosting": {
     "public": "dist",
+    "site": "cgl-games",
     "ignore": [
       "firebase.json",
       "**/.*",
