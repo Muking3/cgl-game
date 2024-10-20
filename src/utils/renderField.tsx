@@ -1,6 +1,5 @@
 import { UseFormReturn } from "react-hook-form";
 import FormFieldCustom from "@/components/molecules/formFieldCustom";
-import FormSelect from "@/components/molecules/formSelect";
 import FormTextarea from "@/components/molecules/formTextarea";
 import FormImage from "@/components/molecules/formImage";
 import FormPassword from "@/components/molecules/formPassword";
@@ -69,17 +68,6 @@ export function renderField({ field, form, clearMessage, url }: RenderFieldProps
                     name={field.name}
                     label={field.label}
                     placeholder={field.placeholder}
-                    labelClassName="text-black"
-                    onFocus={clearMessage}
-                />
-            );
-        case "select":
-            return (
-                <FormSelect
-                    form={form}
-                    name={field.name}
-                    label={field.label}
-                    options={field.options || []}
                     labelClassName="text-black"
                     onFocus={clearMessage}
                 />
