@@ -13,8 +13,6 @@ import HeaderNav from "@/components/organism/headerNav";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
     const [loader, setLoader] = useState(false)
     const { clearMessage, messageState } = useMessage({
@@ -41,7 +39,7 @@ export default function Register() {
 
     const Submit = async (data: RegisterFormValues) => {
         const { name, email, password } = data
-        setLoading(true);
+        setLoader(true);
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
@@ -53,11 +51,11 @@ export default function Register() {
             });
             navigate("/quiz");
             console.log("Utilisateur créé avec succès !");
-            setLoading(false);
+            setLoader(false);
         } catch (error) {
             console.error("Erreur lors de la création de l'utilisateur :", error);
             // setError(error.message);
-            setLoading(false);
+            setLoader(false);
         }
     };
 
